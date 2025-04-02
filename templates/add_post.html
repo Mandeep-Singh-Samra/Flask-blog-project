@@ -1,0 +1,33 @@
+{% extends "base.html" %}
+
+{% block title %}Add New Post - My Blog{% endblock %}
+
+{% block content %}
+    <h1 class="mb-4">Add a New Post</h1>
+
+    <!-- Flash Messages -->
+    {% with messages = get_flashed_messages(with_categories=true) %}
+        {% if messages %}
+            {% for category, message in messages %}
+                <div class="alert alert-{{ category }}">{{ message }}</div>
+            {% endfor %}
+        {% endif %}
+    {% endwith %}
+
+    <form action="{{ url_for('add_post') }}" method="POST" class="mb-3">
+        <div class="mb-3">
+            <label for="username" class="form-label">Your Name</label>
+            <input type="text" id="username" name="username" class="form-control" required>
+        </div>
+        <div class="mb-3">
+            <label for="title" class="form-label">Title</label>
+            <input type="text" id="title" name="title" class="form-control" required>
+        </div>
+        <div class="mb-3">
+            <label for="content" class="form-label">Content</label>
+            <textarea id="content" name="content" class="form-control" rows="5" required></textarea>
+        </div>
+        <button type="submit" class="btn btn-primary">Add Post</button>
+        <a href="{{ url_for('read') }}" class="btn btn-secondary">Cancel</a>
+    </form>
+{% endblock %}
